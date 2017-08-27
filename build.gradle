@@ -1,0 +1,117 @@
+buildscript {
+    dependencies {
+        classpath 'com.h2database:h2:1.4.196'
+        classpath 'org.jooq:jooq-codegen:3.9.5'
+    }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "4.2.0"
+    id 'nu.studer.jooq' version '2.0.6'
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// Apply the application plugin to add support for building an application
+apply plugin: 'application'
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+repositories {
+    jcenter()
+}
+
+configurations {
+    generatedCompile
+}
+
+sourceSets {
+    generated {
+        compileClasspath = configurations.generatedCompile
+        java {
+            srcDir 'src/generated/java'
+        }
+    }
+
+    main {
+        compileClasspath += sourceSets.generated.output
+        runtimeClasspath += sourceSets.generated.output
+    }
+
+    test {
+        compileClasspath += sourceSets.generated.output
+        runtimeClasspath += sourceSets.generated.output
+    }
+}
+
+flyway {
+    url = 'jdbc:h2:file:~/mytodo_db'
+    user = 'mytodo'
+}
+
+jooq {
+    version = '3.9.5'
+    edition = 'OSS'
+    mytodo(sourceSets.main) {
+        jdbc {
+            driver = 'org.h2.Driver'
+            url = 'jdbc:h2:file:~/mytodo_db'
+            user = 'mytodo'
+            password = ''
+        }
+        generator {
+            name = 'org.jooq.util.DefaultGenerator'
+            strategy {
+                name = 'org.jooq.util.DefaultGeneratorStrategy'
+            }
+            database {
+                name = 'org.jooq.util.h2.H2Database'
+                inputSchema = 'PUBLIC'
+                forcedTypes {
+                    forcedType {
+                        name = 'varchar'
+                        expression = '.*'
+                        types = 'JSONB?'
+                    }
+                    forcedType {
+                        name = 'varchar'
+                        expression = '.*'
+                        types = 'INET'
+                    }
+                }
+                // ...
+            }
+            generate {
+                relations = true
+                deprecated = false
+                records = true
+                immutablePojos = true
+                fluentSetters = true
+            }
+            target {
+                packageName = 'ch.mytodo.jooq.codegen'
+                directory = sourceSets.generated.java.sourceDirectories.asPath
+            }
+        }
+    }
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    compile 'com.google.guava:guava:21.0'
+    compile 'org.jooq:jooq:3.9.5'
+    compile 'com.sparkjava:spark-core:2.6.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    runtimeClasspath 'com.h2database:h2:1.4.196'
+    generatedCompile 'org.jooq:jooq:3.9.5'
+
+    jooqRuntime 'com.h2database:h2:1.4.196'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'ch.mytodo.App'

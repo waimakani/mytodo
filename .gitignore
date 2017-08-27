@@ -1,6 +1,15 @@
 # Compiled class file
 *.class
 
+#IntelliJ
+*.iws
+
+#build folders
+build/
+out/
+.gradle/
+jdbc:h2:tcp:/
+
 # Log file
 *.log
 
