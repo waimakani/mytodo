@@ -3,6 +3,8 @@
 
 #IntelliJ
 *.iws
+*.ipr
+*.iml
 
 #build folders
 build/
@@ -20,7 +22,6 @@ jdbc:h2:tcp:/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
