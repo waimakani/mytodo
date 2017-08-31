@@ -1,8 +1,8 @@
 
-import {Todo} from "./todo";
-import {Http, Headers} from "@angular/http";
-import {Injectable} from "@angular/core";
-import "rxjs/add/operator/toPromise";
+import {Todo} from './todo';
+import {Http, Headers} from '@angular/http';
+import {Injectable} from '@angular/core';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TodoService {
@@ -11,11 +11,11 @@ export class TodoService {
     private http: Http
   ) {}
 
-  private baseUrl = "http://localhost:4567";
+  private baseUrl = 'http://localhost:4567';
   private headers= new Headers({'Content-Type': 'application/json'});
 
   getTodos(): Promise<Todo[]> {
-    return this.http.get(this.baseUrl+"/todos")
+    return this.http.get(this.baseUrl + '/todos')
       .toPromise()
       .then(response => response.json() as Todo[])
       .catch(this.handleError);
@@ -28,9 +28,9 @@ export class TodoService {
 
   create(name: string): Promise<Todo> {
     return this.http
-      .post(this.baseUrl+"/todo", JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.baseUrl + '/todo', JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Todo)
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 }
