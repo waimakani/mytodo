@@ -21,7 +21,8 @@ The simple **ToDo List App** of our code camp.
 6. Let's code :)
 
 # Backend REST API
-1. http://localhost:4567/ping Return all found ToDo Lists serialized as JSON
+1. http://localhost:4567/ping Returns all found ToDo Lists serialized as JSON
+1. http://localhost:4567/todo/1 Returns the ToDo List found by 1 (in this case 1) or an empty json
 
 # Frontend
 
