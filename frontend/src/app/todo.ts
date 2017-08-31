@@ -1,3 +1,5 @@
 export class Todo {
-  title: string;
+  toDoListNo: number;
+  name: string;
+  description: string;
 }

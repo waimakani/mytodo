@@ -12,10 +12,6 @@ export class TodoService {
   ) {}
 
   getTodos(): Promise<Todo[]> {
-    var example: Todo[] = [{title: "asdf"}];
-    console.info(example);
-    console.info(JSON.stringify(example));
-
     return this.http.get("http://localhost:4567/todos")
       .toPromise()
       .then(response => response.json() as Todo[])
