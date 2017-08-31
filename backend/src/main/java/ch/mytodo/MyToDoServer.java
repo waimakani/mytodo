@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 
 import static spark.Spark.get;
 import static spark.Spark.modelAndView;
+import static spark.Spark.staticFiles;
 
 public class MyToDoServer {
 
@@ -22,27 +23,12 @@ public class MyToDoServer {
     }
 
     public void startServer(){
+        staticFiles.location("web");
+
         get("/ping", (req, res) -> debugService.ping());
         get("/persistence", (request, response) -> {
             response.type("application/json");
             return debugService.schemaVersionInfo();
         });
-        TemplateViewRoute route = (request, response) ->
-                modelAndView(Maps.newHashMap(), "index.html");
-        get("/mytodo-app", route, new HtmlEngine());
-    }
-
-    private class HtmlEngine extends TemplateEngine {
-        @Override
-        public String render(ModelAndView modelAndView) {
-            InputStream stream = HtmlEngine.class.getResourceAsStream("/" + modelAndView.getViewName());
-            String html = "";
-            try {
-                html = CharStreams.toString(new InputStreamReader(stream, "UTF-8"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return html;
-        }
     }
 }
