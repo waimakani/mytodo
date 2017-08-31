@@ -5,6 +5,7 @@ package ch.mytodo.jooq.codegen;
 
 
 import ch.mytodo.jooq.codegen.tables.SchemaVersion;
+import ch.mytodo.jooq.codegen.tables.ToDo;
 import ch.mytodo.jooq.codegen.tables.ToDoList;
 
 import java.util.ArrayList;
@@ -32,12 +33,17 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = 105081753;
+    private static final long serialVersionUID = 1853139187;
 
     /**
      * The reference instance of <code>PUBLIC</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>PUBLIC.TO_DO</code>.
+     */
+    public final ToDo TO_DO = ch.mytodo.jooq.codegen.tables.ToDo.TO_DO;
 
     /**
      * The table <code>PUBLIC.TO_DO_LIST</code>.
@@ -74,7 +80,8 @@ public class Public extends SchemaImpl {
 
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.SYSTEM_SEQUENCE_A904FD4B_B34C_4F61_8755_0337D9ADF175);
+            Sequences.SYSTEM_SEQUENCE_C66728F1_6111_4884_B87E_3781FC49442E,
+            Sequences.SYSTEM_SEQUENCE_CE6C760C_4C09_454B_A422_2503A75FE3BF);
     }
 
     @Override
@@ -86,6 +93,7 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            ToDo.TO_DO,
             ToDoList.TO_DO_LIST,
             SchemaVersion.SCHEMA_VERSION);
     }

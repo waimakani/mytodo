@@ -5,12 +5,15 @@ package ch.mytodo.jooq.codegen;
 
 
 import ch.mytodo.jooq.codegen.tables.SchemaVersion;
+import ch.mytodo.jooq.codegen.tables.ToDo;
 import ch.mytodo.jooq.codegen.tables.ToDoList;
 import ch.mytodo.jooq.codegen.tables.records.SchemaVersionRecord;
 import ch.mytodo.jooq.codegen.tables.records.ToDoListRecord;
+import ch.mytodo.jooq.codegen.tables.records.ToDoRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
@@ -34,12 +37,14 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<ToDoRecord, Long> IDENTITY_TO_DO = Identities0.IDENTITY_TO_DO;
     public static final Identity<ToDoListRecord, Long> IDENTITY_TO_DO_LIST = Identities0.IDENTITY_TO_DO_LIST;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ToDoRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
     public static final UniqueKey<ToDoListRecord> CONSTRAINT_F = UniqueKeys0.CONSTRAINT_F;
     public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = UniqueKeys0.SCHEMA_VERSION_PK;
 
@@ -47,17 +52,24 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ToDoRecord, ToDoListRecord> CONSTRAINT_4C = ForeignKeys0.CONSTRAINT_4C;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
+        public static Identity<ToDoRecord, Long> IDENTITY_TO_DO = createIdentity(ToDo.TO_DO, ToDo.TO_DO.TO_DO_NO);
         public static Identity<ToDoListRecord, Long> IDENTITY_TO_DO_LIST = createIdentity(ToDoList.TO_DO_LIST, ToDoList.TO_DO_LIST.TO_DO_LIST_NO);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<ToDoRecord> CONSTRAINT_4 = createUniqueKey(ToDo.TO_DO, "CONSTRAINT_4", ToDo.TO_DO.TO_DO_NO);
         public static final UniqueKey<ToDoListRecord> CONSTRAINT_F = createUniqueKey(ToDoList.TO_DO_LIST, "CONSTRAINT_F", ToDoList.TO_DO_LIST.TO_DO_LIST_NO);
         public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = createUniqueKey(SchemaVersion.SCHEMA_VERSION, "schema_version_pk", SchemaVersion.SCHEMA_VERSION.INSTALLED_RANK);
+    }
+
+    private static class ForeignKeys0 extends AbstractKeys {
+        public static final ForeignKey<ToDoRecord, ToDoListRecord> CONSTRAINT_4C = createForeignKey(ch.mytodo.jooq.codegen.Keys.CONSTRAINT_F, ToDo.TO_DO, "CONSTRAINT_4C", ToDo.TO_DO.TO_DO_LIST_NO);
     }
 }

@@ -5,6 +5,7 @@ package ch.mytodo.jooq.codegen;
 
 
 import ch.mytodo.jooq.codegen.tables.SchemaVersion;
+import ch.mytodo.jooq.codegen.tables.ToDo;
 import ch.mytodo.jooq.codegen.tables.ToDoList;
 
 import javax.annotation.Generated;
@@ -22,6 +23,11 @@ import javax.annotation.Generated;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>PUBLIC.TO_DO</code>.
+     */
+    public static final ToDo TO_DO = ch.mytodo.jooq.codegen.tables.ToDo.TO_DO;
 
     /**
      * The table <code>PUBLIC.TO_DO_LIST</code>.

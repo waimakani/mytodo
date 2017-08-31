@@ -1,4 +1,10 @@
 <h2>ToDo List</h2>
+<div>
+  <label>Todo name:</label> <input #todoName />
+  <button (click)="add(todoName.value); todoName.value=''">
+    Add
+  </button>
+</div>
 <ul class="todos">
   <li *ngFor="let todo of todos">
     <span>{{todo.name}}</span>
