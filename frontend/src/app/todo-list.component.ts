@@ -17,13 +17,10 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   add(name: string): void {
-    console.info("create new " + name);
     name= name.trim();
     if(!name) {return;}
     this.todoService.create(name)
-      .then(todo => {
-        this.todos.push(todo);
-      })
+      .then(todo => this.todos.push(todo))
   }
 
   ngOnInit(): void {
