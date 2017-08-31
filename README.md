@@ -11,7 +11,7 @@ The simple **ToDo List App** of our code camp.
 
 # Backend
 1. cd backend
-1. If you are working with IntelliJ `./gradlew idea`
+1. If you are working with IntelliJ `./gradlew idea` (you can open Idea project in folder `backend`)
 1. Execute the following gradle task (preferably using gradle warpper) to setup your your local *H2 Database*: `flywayMigrate`. This will setup will create and setup a local H2 database with a single table for a starter. The H2 file will be located in your home directory `mytodo_db.mv.db`
 1. `./gradlew build`
 1. Run the App either using gradle `run` oder directly from the IDE.
