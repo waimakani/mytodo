@@ -51,9 +51,20 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public ToDo create(ToDo todo) {
         ToDoRecord toDoRecord = persistenceService.doWithAutoCommit(dslContext ->
-                dslContext.insertInto(TO_DO, TO_DO.NAME, TO_DO.DESCRIPTION, TO_DO.TO_DO_LIST_NO)
-                        .values(todo.getName(), todo.getDescription(), todo.getToDoListNo()).returning().fetchOne()
+                dslContext.insertInto(TO_DO,
+                        TO_DO.NAME,
+                        TO_DO.DESCRIPTION,
+                        TO_DO.TO_DO_LIST_NO)
+                        .values(todo.getName(),
+                                todo.getDescription(),
+                                todo.getToDoListNo())
+                        .returning(TO_DO.TO_DO_NO,
+                                TO_DO.TO_DO_UUID,
+                                TO_DO.NAME,
+                                TO_DO.DESCRIPTION,
+                                TO_DO.TO_DO_LIST_NO).fetchOne()
         );
+
         return new ToDo(
                 toDoRecord.getToDoNo(),
                 toDoRecord.getToDoUuid(),

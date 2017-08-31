@@ -39,9 +39,10 @@ public class MyToDoServer {
             return debugService.schemaVersionInfo();
         });
         post("/todo", (req, res) -> {
-            System.out.println("Req " + req.body());
+            res.header("Access-Control-Allow-Origin", "http://localhost:4200");
             ToDo todo= gson.fromJson(req.body(), ToDo.class);
-            return toDoService.create(todo);
+            ToDo justCreatedTodo = toDoService.create(todo);
+            return gson.toJson(justCreatedTodo);
         });
     }
 }

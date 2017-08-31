@@ -28,7 +28,7 @@ export class TodoService {
 
   create(name: string): Promise<Todo> {
     return this.http
-      .post(this.baseUrl + '/todo', JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.baseUrl + '/todo', JSON.stringify({name: name}))
       .toPromise()
       .then(res => res.json() as Todo)
       .catch(this.handleError);
