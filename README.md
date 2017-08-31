@@ -20,6 +20,9 @@ The simple **ToDo List App** of our code camp.
 1. Check to see if the static html pages are successfully bound http://localhost:4567/mytodo-app
 6. Let's code :)
 
+# Backend REST API
+1. http://localhost:4567/ping Return all found ToDo Lists serialized as JSON
+
 # Frontend
 
 1. Work in progress
