@@ -13,5 +13,9 @@ public interface ToDoService {
 
     List<ToDo> getAllToDos();
 
+    List<ToDo> getAllToDosOfList(Integer listNo);
+
     ToDo create(ToDo todo);
+
+    void createList(ToDoList toDoList);
 }

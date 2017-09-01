@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div style="text-align:left">
   <h1>
     Welcome to {{title}}!
   </h1>
@@ -7,10 +7,10 @@
   <table style="width:100%">
     <tr>
       <td style="width: 20%">
-        <todo-lists></todo-lists>
+        <todo-lists (notify)="onNotify($event)"></todo-lists>
       </td>
       <td style="width: 80%">
-        <todo-list></todo-list>
+        <todo-list [todoList]="selectedList"></todo-list>
       </td>
     </tr>
   </table>

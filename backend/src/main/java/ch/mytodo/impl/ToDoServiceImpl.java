@@ -40,10 +40,21 @@ public class ToDoServiceImpl implements ToDoService {
         );
     }
 
+
+
     @Override
     public List<ToDo> getAllToDos(){
         return persistenceService.doWithAutoCommit(dslContext ->
                 dslContext.selectFrom(TO_DO)
+                        .fetchInto(ToDo.class)
+        );
+    }
+
+    @Override
+    public List<ToDo> getAllToDosOfList(Integer listNo) {
+        return persistenceService.doWithAutoCommit(dslContext ->
+                dslContext.selectFrom(TO_DO)
+                        .where(TO_DO.TO_DO_LIST_NO.eq(listNo))
                         .fetchInto(ToDo.class)
         );
     }
@@ -77,6 +88,16 @@ public class ToDoServiceImpl implements ToDoService {
                 toDoRecord.getParentToDoNo(),
                 toDoRecord.getCompleted()
         );
+    }
+
+    @Override
+    public void createList(ToDoList toDoList) {
+        persistenceService.<Integer>doWithAutoCommit(dslContext -> dslContext.insertInto(TO_DO_LIST,
+                TO_DO_LIST.NAME,
+                TO_DO_LIST.DESCRIPTION)
+                .values(toDoList.getName(),
+                        toDoList.getDescription())
+                .execute());
     }
 
 }
