@@ -53,7 +53,7 @@ public class MyToDoServer {
             ToDo todo = gson.fromJson(request.body(), ToDo.class);
             toDoService.update(todo);
             Optional<ToDo> readBack = toDoService.getToDoById(todo.getToDoNo());
-            return readBack.orElse(null);
+            return gson.toJson(readBack.orElse(null));
         });
         get("/ping", (req, res) -> debugService.ping());
         get("/persistence", (request, response) -> {
