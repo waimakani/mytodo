@@ -37,7 +37,9 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoService.getTodos()
-      .then(promisedTodos => this.todos = promisedTodos);
+      .then(promisedTodos => {
+        this.todos = promisedTodos.sort((t1, t2) => t2.toDoNo - t1.toDoNo);
+      });
   }
 
 
