@@ -3,6 +3,7 @@ import {Todo} from './todo';
 import {Http, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
+import {TodoList} from "./todoList";
 
 @Injectable()
 export class TodoService {
@@ -18,6 +19,13 @@ export class TodoService {
     return this.http.get(this.baseUrl + '/todos')
       .toPromise()
       .then(response => response.json() as Todo[])
+      .catch(this.handleError);
+  }
+
+  getTodoLists(): Promise<TodoList[]> {
+    return this.http.get(this.baseUrl + '/todolists')
+      .toPromise()
+      .then(response => response.json() as TodoList[])
       .catch(this.handleError);
   }
 
