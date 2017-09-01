@@ -104,6 +104,7 @@ dependencies {
     compile 'org.jooq:jooq:3.9.5'
     compile 'com.sparkjava:spark-core:2.6.0'
     compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
     runtimeClasspath 'com.h2database:h2:1.4.196'
     generatedCompile 'org.jooq:jooq:3.9.5'
 
