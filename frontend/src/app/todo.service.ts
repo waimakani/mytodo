@@ -26,9 +26,10 @@ export class TodoService {
     return Promise.reject(error.message || error);
   }
 
-  create(name: string): Promise<Todo> {
+  create(name: string, parentToDoNo: number): Promise<Todo> {
     return this.http
-      .post(this.baseUrl + '/todo', JSON.stringify({name: name}))
+      .post(this.baseUrl + '/todo',
+        JSON.stringify({name: name, parentToDoNo: parentToDoNo}))
       .toPromise()
       .then(res => res.json() as Todo)
       .catch(this.handleError);

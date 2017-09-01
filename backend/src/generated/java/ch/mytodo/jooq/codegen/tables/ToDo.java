@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ToDo extends TableImpl<ToDoRecord> {
 
-    private static final long serialVersionUID = -925265532;
+    private static final long serialVersionUID = -160687574;
 
     /**
      * The reference instance of <code>PUBLIC.TO_DO</code>
@@ -76,6 +76,11 @@ public class ToDo extends TableImpl<ToDoRecord> {
      * The column <code>PUBLIC.TO_DO.TO_DO_LIST_NO</code>.
      */
     public final TableField<ToDoRecord, Integer> TO_DO_LIST_NO = createField("TO_DO_LIST_NO", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>PUBLIC.TO_DO.PARENT_TO_DO_NO</code>.
+     */
+    public final TableField<ToDoRecord, Integer> PARENT_TO_DO_NO = createField("PARENT_TO_DO_NO", org.jooq.impl.SQLDataType.INTEGER.defaultValue(org.jooq.impl.DSL.field("NULL", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * Create a <code>PUBLIC.TO_DO</code> table reference

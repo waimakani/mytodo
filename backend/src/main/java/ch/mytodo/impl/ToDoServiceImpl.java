@@ -54,15 +54,18 @@ public class ToDoServiceImpl implements ToDoService {
                 dslContext.insertInto(TO_DO,
                         TO_DO.NAME,
                         TO_DO.DESCRIPTION,
-                        TO_DO.TO_DO_LIST_NO)
+                        TO_DO.TO_DO_LIST_NO,
+                        TO_DO.PARENT_TO_DO_NO)
                         .values(todo.getName(),
                                 todo.getDescription(),
-                                todo.getToDoListNo())
+                                todo.getToDoListNo(),
+                                todo.getParentToDoNo())
                         .returning(TO_DO.TO_DO_NO,
                                 TO_DO.TO_DO_UUID,
                                 TO_DO.NAME,
                                 TO_DO.DESCRIPTION,
-                                TO_DO.TO_DO_LIST_NO).fetchOne()
+                                TO_DO.TO_DO_LIST_NO,
+                                TO_DO.PARENT_TO_DO_NO).fetchOne()
         );
 
         return new ToDo(
@@ -70,7 +73,8 @@ public class ToDoServiceImpl implements ToDoService {
                 toDoRecord.getToDoUuid(),
                 toDoRecord.getName(),
                 toDoRecord.getDescription(),
-                toDoRecord.getToDoListNo()
+                toDoRecord.getToDoListNo(),
+                toDoRecord.getParentToDoNo()
         );
     }
 
