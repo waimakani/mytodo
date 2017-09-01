@@ -11,7 +11,7 @@ import { TodoService } from './todo.service';
   })
 export class TodoListComponent implements OnInit {
   todos: Todo[];
-  showSubTaskDiv: Map<number, boolean> = new Map();
+  subTaskDivShownForToDoNo: number;
 
   constructor(
      private todoService: TodoService
@@ -44,12 +44,15 @@ export class TodoListComponent implements OnInit {
 
 
   isAddSubTaskVisible(toDoNo: number): boolean {
-    return this.showSubTaskDiv.has(toDoNo) && this.showSubTaskDiv.get(toDoNo);
+    return this.subTaskDivShownForToDoNo === toDoNo;
   }
 
   toggleAddSubTaskVisibility(toDoNo: number) {
-    let oldValue = this.isAddSubTaskVisible(toDoNo);
-    this.showSubTaskDiv.set(toDoNo, !oldValue);
+    if (this.subTaskDivShownForToDoNo === toDoNo) {
+      this.subTaskDivShownForToDoNo = null;
+    } else {
+      this.subTaskDivShownForToDoNo = toDoNo;
+    }
   }
 
   hasSubTasks(parentToDoNo: number): boolean {
