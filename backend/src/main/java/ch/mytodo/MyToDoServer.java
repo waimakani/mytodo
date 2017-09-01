@@ -27,6 +27,12 @@ public class MyToDoServer {
     public void startServer(){
         staticFiles.location("web");
 
+        get("/todolists", (request, response) -> {
+            response.type("application/json");
+            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+            List<ToDoList> allToDos = toDoService.getAllToDoLists();
+            return gson.toJson(allToDos);
+        });
         get("/todos", (request, response) -> {
             response.type("application/json");
             response.header("Access-Control-Allow-Origin", "http://localhost:4200");

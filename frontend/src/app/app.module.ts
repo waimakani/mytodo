@@ -4,13 +4,15 @@ import { HttpModule } from '@angular/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './todo-list.component';
-import { TodoService } from './todo.service';
+import {TodoListComponent} from './todo-list.component';
+import {TodoService} from './todo.service';
+import {TodoListsComponent} from "./todo-lists.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoListsComponent
   ],
   imports: [
     BrowserModule,
