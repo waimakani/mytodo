@@ -14,17 +14,20 @@ export class TodoListComponent implements OnInit {
   @Input() todoList: TodoList;
   todos: Todo[];
   subTaskDivShownForToDoNo: number;
+  todoName: string;
 
   constructor(
      private todoService: TodoService
   ) { }
 
-  addToDo(name: string): void {
-    this.add(name, null);
+  addToDo(): void {
+    this.add(this.todoName, null);
+    this.todoName = '';
   }
 
   addSubTask(name: string, parentToDoNo: number): void {
     this.add(name, parentToDoNo);
+    this.toggleAddSubTaskVisibility(parentToDoNo);
   }
 
   private add(name: string, parentToDoNo: number): void {

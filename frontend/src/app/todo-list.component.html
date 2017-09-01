@@ -1,7 +1,8 @@
 <h2>{{todoList.name}}</h2>
 <div>
-  <label>Todo name:</label> <input #todoName />
-  <button (click)="add(todoName.value); todoName.value=''">
+  <label>Todo name:</label>
+  <input [(ngModel)]="todoName" (keyup.enter)="addToDo()"/>
+  <button (click)="addToDo()">
     Add
   </button>
 </div>
@@ -16,8 +17,9 @@
 
     <!--ADD ONE SUBTASK-->
       <div *ngIf="isAddSubTaskVisible(todo.toDoNo)" class="addSubTask">
-      <label>Subtask name:</label> <input #subTaskName />
-      <button (click)="addSubTask(subTaskName.value, todo.toDoNo); subTaskName.value=''; toggleAddSubTaskVisibility(todo.toDoNo)">
+      <label>Subtask name:</label>
+      <input #subTaskName (keyup.enter)="addSubTask(subTaskName.value, todo.toDoNo); subTaskName.value=''"/>
+      <button (click)="addSubTask(subTaskName.value, todo.toDoNo); subTaskName.value=''">
         Add
       </button>
     </div>
