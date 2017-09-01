@@ -51,4 +51,16 @@ export class TodoListComponent implements OnInit {
     let oldValue = this.isAddSubTaskVisible(toDoNo);
     this.showSubTaskDiv.set(toDoNo, !oldValue);
   }
+
+  hasSubTasks(parentToDoNo: number): boolean {
+    return this.getSubTasks(parentToDoNo).length > 0;
+  }
+
+  getSubTasks(parentToDoNo: number): Todo[] {
+    return this.todos.filter(todo => todo.parentToDoNo===parentToDoNo);
+  }
+
+  getRootToDos(): Todo[] {
+    return this.todos.filter(todo => todo.parentToDoNo==null);
+  }
 }

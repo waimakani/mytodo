@@ -6,15 +6,30 @@
   </button>
 </div>
 <ul class="todos">
-  <li *ngFor="let todo of todos">
-    <span><button (click)="console.log('button clicked')"><ng-fa name="check"></ng-fa></button>{{todo.name}} (Parent: {{todo.parentToDoNo}})</span>
-    <button (click)="toggleAddSubTaskVisibility(todo.toDoNo)">Add subtask</button>
+  <!--DEFINE TEMPLATE FOR RECURSION-->
+  <ng-template #recursiveList let-tmptodos>
+    <li *ngFor="let todo of tmptodos">
+      <span>
+        <button (click)="console.log('button clicked')"><ng-fa name="check"></ng-fa></button>{{todo.name}} (Parent: {{todo.parentToDoNo}})
+      </span>
+      <button (click)="toggleAddSubTaskVisibility(todo.toDoNo)">Add subtask</button>
 
-    <div *ngIf="isAddSubTaskVisible(todo.toDoNo)" class="addSubTask">
+    <!--ADD ONE SUBTASK-->
+      <div *ngIf="isAddSubTaskVisible(todo.toDoNo)" class="addSubTask">
       <label>Subtask name:</label> <input #subTaskName />
       <button (click)="addSubTask(subTaskName.value, todo.toDoNo); subTaskName.value=''; toggleAddSubTaskVisibility(todo.toDoNo)">
         Add
       </button>
     </div>
-  </li>
+
+  <!--SHOW SUBTASKS-->
+      <ul *ngIf="hasSubTasks(todo.toDoNo)">
+        <ng-container *ngTemplateOutlet="recursiveList;
+            context:{ $implicit: getSubTasks(todo.toDoNo) }">
+        </ng-container>
+      </ul>
+    </li></ng-template>
+
+  <!--CALL TEMPLATE FOR todos root-->
+  <ng-container *ngTemplateOutlet="recursiveList; context: {$implicit:getRootToDos()}"></ng-container>
 </ul>
