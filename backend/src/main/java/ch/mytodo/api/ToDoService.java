@@ -14,4 +14,6 @@ public interface ToDoService {
     List<ToDo> getAllToDos();
 
     ToDo create(ToDo todo);
+
+    void createList(ToDoList toDoList);
 }

@@ -20,4 +20,14 @@ export class TodoListsComponent implements OnInit {
     this.todoService.getTodoLists()
       .then(promisedTodoLists => this.todoLists = promisedTodoLists);
   }
+
+  createToDoList(name: string): void {
+      this.todoService.createToDoList(name)
+        .then(promisedTodoLists => this.todoLists = promisedTodoLists);
+  }
+
+  searchToDoList(id: number): void{
+      this.todoService.getTodoListById(id)
+        .then(promisedTodoList => this.todoLists = [promisedTodoList]);
+  }
 }

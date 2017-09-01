@@ -79,4 +79,14 @@ public class ToDoServiceImpl implements ToDoService {
         );
     }
 
+    @Override
+    public void createList(ToDoList toDoList) {
+        persistenceService.<Integer>doWithAutoCommit(dslContext -> dslContext.insertInto(TO_DO_LIST,
+                TO_DO_LIST.NAME,
+                TO_DO_LIST.DESCRIPTION)
+                .values(toDoList.getName(),
+                        toDoList.getDescription())
+                .execute());
+    }
+
 }

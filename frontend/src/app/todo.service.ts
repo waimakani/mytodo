@@ -29,6 +29,22 @@ export class TodoService {
       .catch(this.handleError);
   }
 
+  getTodoListById(id : number): Promise<TodoList> {
+    return this.http.get(this.baseUrl + '/todoList/' + id)
+      .toPromise()
+      .then(response => response.json() as TodoList)
+      .catch(this.handleError);
+  }
+
+  createToDoList(name: string): Promise<TodoList[]>{
+    return this.http
+      .post(this.baseUrl + '/todolist',
+        JSON.stringify({name: name}))
+      .toPromise()
+      .then(response => response.json() as TodoList[])
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
