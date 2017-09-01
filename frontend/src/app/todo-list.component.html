@@ -1,4 +1,3 @@
-<div *ngIf="todoList;else other_content">
   <h2>{{todoList.name}}</h2>
   <div>
     <label>Todo name:</label>
@@ -36,7 +35,4 @@
     <!--CALL TEMPLATE FOR todos root-->
     <ng-container *ngTemplateOutlet="recursiveList; context: {$implicit:getRootToDos()}"></ng-container>
   </ul>
-</div>
-<ng-template #other_content>
-  <h2>No list selected ...</h2>
-</ng-template>
+
