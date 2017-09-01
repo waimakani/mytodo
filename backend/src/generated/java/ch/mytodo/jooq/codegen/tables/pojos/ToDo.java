@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ToDo implements Serializable {
 
-    private static final long serialVersionUID = 800118706;
+    private static final long serialVersionUID = 1158310040;
 
     private final Long    toDoNo;
     private final UUID    toDoUuid;
@@ -31,6 +31,7 @@ public class ToDo implements Serializable {
     private final String  description;
     private final Integer toDoListNo;
     private final Integer parentToDoNo;
+    private final Boolean active;
 
     public ToDo(ToDo value) {
         this.toDoNo = value.toDoNo;
@@ -39,6 +40,7 @@ public class ToDo implements Serializable {
         this.description = value.description;
         this.toDoListNo = value.toDoListNo;
         this.parentToDoNo = value.parentToDoNo;
+        this.active = value.active;
     }
 
     public ToDo(
@@ -47,7 +49,8 @@ public class ToDo implements Serializable {
         String  name,
         String  description,
         Integer toDoListNo,
-        Integer parentToDoNo
+        Integer parentToDoNo,
+        Boolean active
     ) {
         this.toDoNo = toDoNo;
         this.toDoUuid = toDoUuid;
@@ -55,6 +58,7 @@ public class ToDo implements Serializable {
         this.description = description;
         this.toDoListNo = toDoListNo;
         this.parentToDoNo = parentToDoNo;
+        this.active = active;
     }
 
     public Long getToDoNo() {
@@ -81,6 +85,10 @@ public class ToDo implements Serializable {
         return this.parentToDoNo;
     }
 
+    public Boolean getActive() {
+        return this.active;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ToDo (");
@@ -91,6 +99,7 @@ public class ToDo implements Serializable {
         sb.append(", ").append(description);
         sb.append(", ").append(toDoListNo);
         sb.append(", ").append(parentToDoNo);
+        sb.append(", ").append(active);
 
         sb.append(")");
         return sb.toString();

@@ -74,7 +74,8 @@ public class ToDoServiceImpl implements ToDoService {
                 toDoRecord.getName(),
                 toDoRecord.getDescription(),
                 toDoRecord.getToDoListNo(),
-                toDoRecord.getParentToDoNo()
+                toDoRecord.getParentToDoNo(),
+                toDoRecord.getActive()
         );
     }
 
