@@ -1,7 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
+import {TodoList} from "./todoList";
 
 
 @Component({
@@ -10,19 +11,23 @@ import { TodoService } from './todo.service';
     styleUrls: [ './todo-list.component.css'],
   })
 export class TodoListComponent implements OnInit {
+  @Input() todoList: TodoList;
   todos: Todo[];
-  showSubTaskDiv: Map<number, boolean> = new Map();
+  subTaskDivShownForToDoNo: number;
+  todoName: string;
 
   constructor(
      private todoService: TodoService
   ) { }
 
-  addToDo(name: string): void {
-    this.add(name, null);
+  addToDo(): void {
+    this.add(this.todoName, null);
+    this.todoName = '';
   }
 
   addSubTask(name: string, parentToDoNo: number): void {
     this.add(name, parentToDoNo);
+    this.toggleAddSubTaskVisibility(parentToDoNo);
   }
 
   private add(name: string, parentToDoNo: number): void {
@@ -44,11 +49,26 @@ export class TodoListComponent implements OnInit {
 
 
   isAddSubTaskVisible(toDoNo: number): boolean {
-    return this.showSubTaskDiv.has(toDoNo) && this.showSubTaskDiv.get(toDoNo);
+    return this.subTaskDivShownForToDoNo === toDoNo;
   }
 
   toggleAddSubTaskVisibility(toDoNo: number) {
-    let oldValue = this.isAddSubTaskVisible(toDoNo);
-    this.showSubTaskDiv.set(toDoNo, !oldValue);
+    if (this.subTaskDivShownForToDoNo === toDoNo) {
+      this.subTaskDivShownForToDoNo = null;
+    } else {
+      this.subTaskDivShownForToDoNo = toDoNo;
+    }
+  }
+
+  hasSubTasks(parentToDoNo: number): boolean {
+    return this.getSubTasks(parentToDoNo).length > 0;
+  }
+
+  getSubTasks(parentToDoNo: number): Todo[] {
+    return this.todos.filter(todo => todo.parentToDoNo===parentToDoNo);
+  }
+
+  getRootToDos(): Todo[] {
+    return this.todos.filter(todo => todo.parentToDoNo==null);
   }
 }

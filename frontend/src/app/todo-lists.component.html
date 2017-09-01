@@ -8,7 +8,7 @@
   Search
 </button>
 <ul class="todoLists">
-  <li *ngFor="let todoList of todoLists">
-    <span>{{todoList.name}}</span>
+  <li *ngFor="let todoList of todoLists" (click)="onClick(todoList)">
+    <a><span>{{todoList.name}}</span></a>
   </li>
 </ul>

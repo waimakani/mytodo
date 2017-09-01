@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {TodoListComponent} from './todo-list.component';
 import {TodoService} from './todo.service';
 import {TodoListsComponent} from "./todo-lists.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {TodoListsComponent} from "./todo-lists.component";
   imports: [
     BrowserModule,
     HttpModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    FormsModule
   ],
   providers: [ TodoService],
   bootstrap: [AppComponent]
