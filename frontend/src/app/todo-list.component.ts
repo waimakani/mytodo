@@ -1,7 +1,7 @@
 
-import {Component, OnInit} from "@angular/core";
-import {Todo} from "./todo";
-import {TodoService} from "./todo.service";
+import { Component, OnInit } from '@angular/core';
+import { Todo } from './todo';
+import { TodoService } from './todo.service';
 
 
 @Component({
@@ -17,10 +17,13 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   add(name: string): void {
-    name= name.trim();
-    if(!name) {return;}
+    console.info('create new ' + name);
+    name = name.trim();
+    if (!name) {return; }
     this.todoService.create(name)
-      .then(todo => this.todos.push(todo))
+      .then(todo => {
+        this.todos.push(todo);
+      });
   }
 
   ngOnInit(): void {
