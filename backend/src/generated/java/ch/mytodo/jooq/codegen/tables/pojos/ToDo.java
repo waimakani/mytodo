@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ToDo implements Serializable {
 
-    private static final long serialVersionUID = 1158310040;
+    private static final long serialVersionUID = -899390457;
 
     private final Long    toDoNo;
     private final UUID    toDoUuid;
@@ -31,7 +31,7 @@ public class ToDo implements Serializable {
     private final String  description;
     private final Integer toDoListNo;
     private final Integer parentToDoNo;
-    private final Boolean active;
+    private final Boolean completed;
 
     public ToDo(ToDo value) {
         this.toDoNo = value.toDoNo;
@@ -40,7 +40,7 @@ public class ToDo implements Serializable {
         this.description = value.description;
         this.toDoListNo = value.toDoListNo;
         this.parentToDoNo = value.parentToDoNo;
-        this.active = value.active;
+        this.completed = value.completed;
     }
 
     public ToDo(
@@ -50,7 +50,7 @@ public class ToDo implements Serializable {
         String  description,
         Integer toDoListNo,
         Integer parentToDoNo,
-        Boolean active
+        Boolean completed
     ) {
         this.toDoNo = toDoNo;
         this.toDoUuid = toDoUuid;
@@ -58,7 +58,7 @@ public class ToDo implements Serializable {
         this.description = description;
         this.toDoListNo = toDoListNo;
         this.parentToDoNo = parentToDoNo;
-        this.active = active;
+        this.completed = completed;
     }
 
     public Long getToDoNo() {
@@ -85,8 +85,8 @@ public class ToDo implements Serializable {
         return this.parentToDoNo;
     }
 
-    public Boolean getActive() {
-        return this.active;
+    public Boolean getCompleted() {
+        return this.completed;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ToDo implements Serializable {
         sb.append(", ").append(description);
         sb.append(", ").append(toDoListNo);
         sb.append(", ").append(parentToDoNo);
-        sb.append(", ").append(active);
+        sb.append(", ").append(completed);
 
         sb.append(")");
         return sb.toString();

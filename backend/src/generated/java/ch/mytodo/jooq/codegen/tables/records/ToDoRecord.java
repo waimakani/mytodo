@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Record7<Long, UUID, String, String, Integer, Integer, Boolean> {
 
-    private static final long serialVersionUID = 593625683;
+    private static final long serialVersionUID = 1891655898;
 
     /**
      * Setter for <code>PUBLIC.TO_DO.TO_DO_NO</code>.
@@ -123,17 +123,17 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
     }
 
     /**
-     * Setter for <code>PUBLIC.TO_DO.ACTIVE</code>.
+     * Setter for <code>PUBLIC.TO_DO.COMPLETED</code>.
      */
-    public ToDoRecord setActive(Boolean value) {
+    public ToDoRecord setCompleted(Boolean value) {
         set(6, value);
         return this;
     }
 
     /**
-     * Getter for <code>PUBLIC.TO_DO.ACTIVE</code>.
+     * Getter for <code>PUBLIC.TO_DO.COMPLETED</code>.
      */
-    public Boolean getActive() {
+    public Boolean getCompleted() {
         return (Boolean) get(6);
     }
 
@@ -222,7 +222,7 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
      */
     @Override
     public Field<Boolean> field7() {
-        return ToDo.TO_DO.ACTIVE;
+        return ToDo.TO_DO.COMPLETED;
     }
 
     /**
@@ -278,7 +278,7 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
      */
     @Override
     public Boolean value7() {
-        return getActive();
+        return getCompleted();
     }
 
     /**
@@ -340,7 +340,7 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
      */
     @Override
     public ToDoRecord value7(Boolean value) {
-        setActive(value);
+        setCompleted(value);
         return this;
     }
 
@@ -373,7 +373,7 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
     /**
      * Create a detached, initialised ToDoRecord
      */
-    public ToDoRecord(Long toDoNo, UUID toDoUuid, String name, String description, Integer toDoListNo, Integer parentToDoNo, Boolean active) {
+    public ToDoRecord(Long toDoNo, UUID toDoUuid, String name, String description, Integer toDoListNo, Integer parentToDoNo, Boolean completed) {
         super(ToDo.TO_DO);
 
         set(0, toDoNo);
@@ -382,6 +382,6 @@ public class ToDoRecord extends UpdatableRecordImpl<ToDoRecord> implements Recor
         set(3, description);
         set(4, toDoListNo);
         set(5, parentToDoNo);
-        set(6, active);
+        set(6, completed);
     }
 }
