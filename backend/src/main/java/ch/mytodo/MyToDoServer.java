@@ -8,6 +8,7 @@ import ch.mytodo.jooq.codegen.tables.pojos.ToDoList;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Optional;
 
 import static spark.Spark.*;
 
@@ -38,6 +39,17 @@ public class MyToDoServer {
             response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             List<ToDo> allToDos = toDoService.getAllToDos();
             return gson.toJson(allToDos);
+        });
+        get("/todos/:id", (request, response) -> {
+            Long id = Long.valueOf(request.params(":id"));
+            response.type("application/json");
+            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+            Optional<String> todo = toDoService.getAllToDos()
+                    .stream()
+                    .filter(t -> t.getToDoNo().equals(id))
+                    .map(t -> gson.toJson(t))
+                    .findFirst();
+            return todo.orElse(null);
         });
         get("/ping", (req, res) -> debugService.ping());
         get("/persistence", (request, response) -> {
