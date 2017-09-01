@@ -1,7 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
+import {TodoList} from "./todoList";
 
 
 @Component({
@@ -10,6 +11,7 @@ import { TodoService } from './todo.service';
     styleUrls: [ './todo-list.component.css'],
   })
 export class TodoListComponent implements OnInit {
+  @Input() todoList: TodoList;
   todos: Todo[];
   subTaskDivShownForToDoNo: number;
 

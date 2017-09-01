@@ -1,5 +1,5 @@
 
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {TodoService} from "./todo.service";
 import {TodoList} from "./todoList";
 
@@ -11,10 +11,15 @@ import {TodoList} from "./todoList";
   })
 export class TodoListsComponent implements OnInit {
   todoLists: TodoList[];
+  @Output() notify: EventEmitter<TodoList>= new EventEmitter();
 
   constructor(
      private todoService: TodoService
   ) {}
+
+  onClick(todoList: TodoList): void {
+    this.notify.emit(todoList);
+  }
 
   ngOnInit(): void {
     this.todoService.getTodoLists()
