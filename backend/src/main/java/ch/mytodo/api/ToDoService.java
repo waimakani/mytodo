@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ToDoService {
     Optional<ToDoList> getToDoListById(Long tolistId);
 
+    Optional<ToDo> getToDoById(Long todoId);
+
     List<ToDoList> getAllToDoLists();
 
     List<ToDo> getAllToDos();
@@ -18,4 +20,6 @@ public interface ToDoService {
     ToDo create(ToDo todo);
 
     void createList(ToDoList toDoList);
+
+    void update(ToDo todo);
 }

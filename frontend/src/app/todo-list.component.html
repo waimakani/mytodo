@@ -11,7 +11,7 @@
   <ng-template #recursiveList let-tmptodos>
     <li *ngFor="let todo of tmptodos">
       <span>
-        <button (click)="console.log('button clicked')"><ng-fa name="check"></ng-fa></button>{{todo.name}} (Parent: {{todo.parentToDoNo}})
+        <button (click)="completeTask(todo)"><ng-fa name="check"></ng-fa></button>{{todo.name}} (Parent: {{todo.parentToDoNo}})
       </span>
       <button (click)="toggleAddSubTaskVisibility(todo.toDoNo)">Add subtask</button>
 

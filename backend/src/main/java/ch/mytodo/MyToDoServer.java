@@ -30,26 +30,30 @@ public class MyToDoServer {
 
         get("/todolists", (request, response) -> {
             response.type("application/json");
-            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             List<ToDoList> allToDos = toDoService.getAllToDoLists();
             return gson.toJson(allToDos);
         });
         get("/todos", (request, response) -> {
             response.type("application/json");
-            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             List<ToDo> allToDos = toDoService.getAllToDos();
             return gson.toJson(allToDos);
         });
         get("/todos/:id", (request, response) -> {
             Long id = Long.valueOf(request.params(":id"));
             response.type("application/json");
-            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             Optional<String> todo = toDoService.getAllToDos()
                     .stream()
                     .filter(t -> t.getToDoNo().equals(id))
                     .map(t -> gson.toJson(t))
                     .findFirst();
             return todo.orElse(null);
+        });
+        put("/todos/:id", (request, response) -> {
+            response.type("application/json");
+            ToDo todo = gson.fromJson(request.body(), ToDo.class);
+            toDoService.update(todo);
+            Optional<ToDo> readBack = toDoService.getToDoById(todo.getToDoNo());
+            return readBack.orElse(null);
         });
         get("/ping", (req, res) -> debugService.ping());
         get("/persistence", (request, response) -> {
@@ -82,7 +86,6 @@ public class MyToDoServer {
 
 
         post("/todo", (req, res) -> {
-            res.header("Access-Control-Allow-Origin", "http://localhost:4200");
             ToDo todo= gson.fromJson(req.body(), ToDo.class);
             ToDo justCreatedTodo = toDoService.create(todo);
             return gson.toJson(justCreatedTodo);

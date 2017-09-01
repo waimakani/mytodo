@@ -12,7 +12,7 @@ export class TodoService {
     private http: Http
   ) {}
 
-  private baseUrl = 'http://localhost:4567';
+  private baseUrl = 'http://localhost:4200/api';
   private headers= new Headers({'Content-Type': 'application/json'});
 
   getTodos(): Promise<Todo[]> {
@@ -57,5 +57,13 @@ export class TodoService {
       .toPromise()
       .then(res => res.json() as Todo)
       .catch(this.handleError);
+  }
+
+  update(todo: Todo) {
+    this.http
+    .put(this.baseUrl + '/todos/' + todo.toDoNo, JSON.stringify(todo))
+    .toPromise()
+    .then(res => res.json() as Todo)
+    .catch(this.handleError);
   }
 }

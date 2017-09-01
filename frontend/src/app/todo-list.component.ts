@@ -71,4 +71,9 @@ export class TodoListComponent implements OnInit {
   getRootToDos(): Todo[] {
     return this.todos.filter(todo => todo.parentToDoNo==null);
   }
+
+  completeTask(todo: Todo) {
+    todo.completed = true;
+    this.todoService.update(todo);
+  }
 }
