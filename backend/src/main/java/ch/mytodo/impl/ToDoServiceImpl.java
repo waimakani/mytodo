@@ -124,4 +124,12 @@ public class ToDoServiceImpl implements ToDoService {
         .execute());
     }
 
+    @Override
+    public void delete(Long todoNo) {
+        persistenceService.doWithAutoCommit(dslContext ->
+            dslContext.deleteFrom(TO_DO)
+                    .where(TO_DO.TO_DO_NO.equal(todoNo))
+                .execute());
+    }
+
 }

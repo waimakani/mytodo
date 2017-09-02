@@ -61,9 +61,16 @@ export class TodoService {
 
   update(todo: Todo) {
     this.http
-    .put(this.baseUrl + '/todos/' + todo.toDoNo, JSON.stringify(todo))
-    .toPromise()
-    .then(res => res.json() as Todo)
-    .catch(this.handleError);
+      .put(this.baseUrl + '/todos/' + todo.toDoNo, JSON.stringify(todo))
+      .toPromise()
+      .then(res => res.json() as Todo)
+      .catch(this.handleError);
+  }
+
+  delete(todo: Todo): Promise<void> {
+    return this.http
+      .delete(this.baseUrl + '/todos/' + todo.toDoNo)
+      .toPromise()
+      .catch(this.handleError);
   }
 }

@@ -55,6 +55,16 @@ public class MyToDoServer {
             Optional<ToDo> readBack = toDoService.getToDoById(todo.getToDoNo());
             return gson.toJson(readBack.orElse(null));
         });
+
+        delete("/todos/:id",(request, response) -> {
+            response.type("application/json");
+            String id = request.params(":id");
+            if (id != null) {
+                toDoService.delete(Long.parseLong(id));
+            }
+            return "ToDo " + id + " has been deleted successfully";
+        });
+
         get("/ping", (req, res) -> debugService.ping());
         get("/persistence", (request, response) -> {
             response.type("application/json");
@@ -63,7 +73,6 @@ public class MyToDoServer {
 
         get("/todoList/:id",(request, response) -> {
             response.type("application/json");
-            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             String id = request.params(":id");
             if(id != null){
                 Optional<ToDoList> toDoListById = toDoService.getToDoListById(Long.parseLong(id));
@@ -75,9 +84,9 @@ public class MyToDoServer {
                 return gson.toJson(allToDos);
             }
         });
+
         post("/todolist",(request, response) -> {
             response.type("application/json");
-            response.header("Access-Control-Allow-Origin", "http://localhost:4200");
             ToDoList toDoList = gson.fromJson(request.body(), ToDoList.class);
             toDoService.createList(toDoList);
             List<ToDoList> allToDos = toDoService.getAllToDoLists();

@@ -22,4 +22,6 @@ public interface ToDoService {
     void createList(ToDoList toDoList);
 
     void update(ToDo todo);
+
+    void delete(Long todoNo);
 }

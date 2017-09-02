@@ -13,7 +13,7 @@
       <li *ngFor="let todo of tmptodos">
         <span [class.completed]=todo.completed>
           <button *ngIf="!todo.completed" (click)="completeTask(todo)" class="transparent-button non-completed"><ng-fa name="check"></ng-fa></button>
-          <button *ngIf="todo.completed" class="transparent-button completed"><ng-fa name="times"></ng-fa></button>
+          <button *ngIf="todo.completed" (click)="deleteTask(todo)" class="transparent-button completed"><ng-fa name="times"></ng-fa></button>
           {{todo.name}} (Parent: {{todo.parentToDoNo}})
         </span>
         <button (click)="toggleAddSubTaskVisibility(todo.toDoNo)">Add subtask</button>

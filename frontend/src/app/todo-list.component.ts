@@ -31,16 +31,19 @@ export class TodoListComponent implements OnInit {
   }
 
   private add(name: string, parentToDoNo: number): void {
-    console.info('create new ' + name);
     name = name.trim();
     if (!name) {return; }
     this.todoService.create(name, parentToDoNo)
-      .then(todo => {
-        this.todos.push(todo);
+      .then(() => {
+        this.setTodos();
       });
   }
 
   ngOnInit(): void {
+    this.setTodos();
+  }
+
+  private setTodos() {
     this.todoService.getTodos()
       .then(promisedTodos => {
         this.todos = promisedTodos.sort((t1, t2) => t2.toDoNo - t1.toDoNo);
@@ -73,7 +76,15 @@ export class TodoListComponent implements OnInit {
   }
 
   completeTask(todo: Todo) {
+    console.log('Completing task' + JSON.stringify(todo));
     todo.completed = true;
     this.todoService.update(todo);
+  }
+
+  deleteTask(todo: Todo) {
+    this.todoService.delete(todo)
+    .then(() => {
+      this.setTodos();
+    });
   }
 }
