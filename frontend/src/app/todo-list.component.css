@@ -6,7 +6,8 @@
   text-decoration: line-through;
 }
 
-.transparent-button {
+
+.transparent-button.non-completed {
   border:none;
   background-image:none;
   background-color:transparent;
@@ -14,4 +15,38 @@
   -moz-box-shadow: none;
   box-shadow: none;
   cursor: pointer;
+
+}
+
+.transparent-button.completed{
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.transparent-button.completed:hover{
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  cursor: pointer;
+  color: green;
+}
+
+
+.transparent-button.non-completed:hover {
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  cursor: pointer;
+  color: red;
 }
