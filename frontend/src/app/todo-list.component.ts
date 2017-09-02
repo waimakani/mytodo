@@ -46,7 +46,12 @@ export class TodoListComponent implements OnInit {
   private setTodos() {
     this.todoService.getTodos()
       .then(promisedTodos => {
-        this.todos = promisedTodos.sort((t1, t2) => t2.toDoNo - t1.toDoNo);
+        this.todos = promisedTodos.sort((t1, t2) => {
+          if (t1.completed !== t2.completed) {
+            return t1.completed ? 1 : -1;
+          }
+          return t2.toDoNo - t1.toDoNo;
+        });
       });
   }
 
@@ -76,15 +81,17 @@ export class TodoListComponent implements OnInit {
   }
 
   completeTask(todo: Todo) {
-    console.log('Completing task' + JSON.stringify(todo));
     todo.completed = true;
-    this.todoService.update(todo);
+    this.todoService.update(todo)
+      .then(() => {
+        this.setTodos();
+      });
   }
 
   deleteTask(todo: Todo) {
     this.todoService.delete(todo)
-    .then(() => {
-      this.setTodos();
-    });
+      .then(() => {
+        this.setTodos();
+      });
   }
 }

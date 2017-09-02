@@ -3,7 +3,7 @@ import {Todo} from './todo';
 import {Http, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {TodoList} from "./todoList";
+import {TodoList} from './todoList';
 
 @Injectable()
 export class TodoService {
@@ -59,8 +59,8 @@ export class TodoService {
       .catch(this.handleError);
   }
 
-  update(todo: Todo) {
-    this.http
+  update(todo: Todo): Promise<Todo> {
+    return this.http
       .put(this.baseUrl + '/todos/' + todo.toDoNo, JSON.stringify(todo))
       .toPromise()
       .then(res => res.json() as Todo)
